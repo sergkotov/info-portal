@@ -6,6 +6,22 @@ export interface Character {
     wiki: string
 }
 
+export type CharacterShort = Pick<Character, "name" | "thumbnail">
+
+export interface CharacterServerData {
+    id?: number,
+    name?: string,
+    description?: string,
+    modified?: Date,
+    resourceURI?: string,
+    urls?: CharacterURL[],
+    thumbnail?: CharacterImage,
+    comics?: CharacterComicList,
+    stories?: CharacterStoryList,
+    events?: CharacterEventList,
+    series: CharacterSeriesList
+}
+
 interface CharacterURL {
     type?: string,
     url?: string
@@ -63,20 +79,6 @@ interface CharacterSeriesList {
     returned?: number,
     collectionURI?: string,
     items?: CharacterSeriesSummary[]
-}
-
-export interface CharacterServerData {
-    id?: number,
-    name?: string,
-    description?: string,
-    modified?: Date,
-    resourceURI?: string,
-    urls?: CharacterURL[],
-    thumbnail?: CharacterImage,
-    comics?: CharacterComicList,
-    stories?: CharacterStoryList,
-    events?: CharacterEventList,
-    series: CharacterSeriesList
 }
 
 export interface CharactersServerData {

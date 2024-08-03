@@ -68,7 +68,7 @@ const RandomChar: FC = ()  => {
 const RandomCharView: FC<{char: Character}> = 
     ({char}) => {
         const {name, description, thumbnail, homepage, wiki} = char;
-    const imgClasses = (thumbnail.indexOf('image_not_available') === -1) ? "randomchar__img" : "randomchar__img randomchar__img_nf";
+        const imgClasses = (thumbnail.indexOf('image_not_available') === -1) ? "randomchar__img" : "randomchar__img randomchar__img_nf";
     return (
         <div className="randomchar__block">
             <img src={thumbnail} alt="Random character" className={imgClasses} />

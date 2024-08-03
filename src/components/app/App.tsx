@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../style/style.scss';
 import RandomChar from '../randomChar/RandomChar';
+import CharList from '../charList/CharList';
 
 import decoration from '../../resources/img/vision.png';
 
@@ -11,7 +12,7 @@ function App() {
         <main>
             <RandomChar/>
             <div className="char__content">
-                {/* <CharList/> */}
+                <CharList/>
                 {/* <CharInfo/> */}
             </div>
             <img className="bg-decoration" src={decoration} alt="vision"/>
