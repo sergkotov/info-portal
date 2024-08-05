@@ -25,6 +25,9 @@
             width: 150px;
             height: 150px;
             object-fit: cover;
+            &.char__img_nf {
+                object-fit: contain;
+            }
         }
     }
     &__btns {
@@ -62,3 +65,4 @@
         text-align: center;
     }
 }
+
