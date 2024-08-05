@@ -7,6 +7,10 @@ export interface Character {
     wiki: string
 }
 
+export interface CharacterInfo extends Character {
+    comics?: CharacterComicSummary[]
+}
+
 export type CharacterShort = Pick<Character, "id" | "name" | "thumbnail">
 
 export interface CharacterServerData {

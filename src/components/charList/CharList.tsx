@@ -6,7 +6,7 @@ import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../app/errorMessage/ErrorMessage";
 import CharListItem from './CharListItem/CharListItem';
 
-const CharList: FC = () => {
+const CharList: FC<{selectChar: (id: number) => void}> = ({selectChar}) => {
     const [chars, setChars] = useState<CharacterShort[] | null>(null);
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -33,7 +33,7 @@ const CharList: FC = () => {
         <div className="char__list">
             {error && <ErrorMessage/>}
             {loading && <Spinner/>}
-            {!(error || loading) && <CharListItem chars={chars}/>}
+            {!(error || loading) && <CharListItem chars={chars} selectChar={selectChar}/>}
             <button className="button button__main button__long">
                 <div className="inner">load more</div>
             </button>

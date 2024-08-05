@@ -1,4 +1,4 @@
-import { Character, CharacterServerData, CharactersServerData, CharacterShort } from "../types/types";
+import { Character, CharacterServerData, CharactersServerData, CharacterShort, CharacterInfo } from "../types/types";
 
 const _apiBase = "https://gateway.marvel.com:443/v1/public/";
 const _apiKey = `apikey=${process.env.REACT_APP_API_KEY}`;
@@ -11,6 +11,18 @@ function _transformCharacter(char: CharacterServerData) : Character {
         thumbnail: (char.thumbnail?.path || '') + '.' + (char.thumbnail?.extension || ''),
         homepage: (char.urls && char.urls[0].url) ? char.urls[0].url : '',
         wiki: (char.urls && char.urls[1].url) ? char.urls[1].url : ''
+    }
+}
+
+function _transformCharacterInfo(char: CharacterServerData) : CharacterInfo {
+    return {
+        id: char.id || 0,
+        name: char.name || '',
+        description: char.description || 'No description for now',
+        thumbnail: (char.thumbnail?.path || '') + '.' + (char.thumbnail?.extension || ''),
+        homepage: (char.urls && char.urls[0].url) ? char.urls[0].url : '',
+        wiki: (char.urls && char.urls[1].url) ? char.urls[1].url : '',
+        comics: (char.comics?.items || [])
     }
 }
 
@@ -49,5 +61,12 @@ export async function getCharacter(id: number) {
     const res = await getResource(`${_apiBase}characters/${id}?${_apiKey}`);
     if(res.data?.results[0]) {
         return _transformCharacter(res.data.results[0]);
+    }
+}
+
+export async function getCharacterInfo(id: number) {
+    const res = await getResource(`${_apiBase}characters/${id}?${_apiKey}`);
+    if(res.data?.results[0]) {
+        return _transformCharacterInfo(res.data.results[0]);
     }
 }
