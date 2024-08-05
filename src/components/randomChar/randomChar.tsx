@@ -9,7 +9,7 @@ import mjolnir from '../../resources/img/mjolnir.png';
 
 
 const RandomChar: FC = ()  => {
-    const [character, setCharacter] = useState<Character>({name: '', description: '', 
+    const [character, setCharacter] = useState<Character>({id: 0, name: '', description: '', 
         thumbnail: '', homepage: '', wiki: ''});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);

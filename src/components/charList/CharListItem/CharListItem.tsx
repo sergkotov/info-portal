@@ -14,7 +14,7 @@ const CharListItem: FC<{chars: CharacterShort[] | null}> = ({chars}) => {
         return(
             <ul className="char__grid">
                 {chars.map(item => (
-                    <li key={item.name} className={(item.name === selected) ? "char__item char__item_selected" : "char__item"} 
+                    <li key={item.id} className={(item.name === selected) ? "char__item char__item_selected" : "char__item"} 
                         onClick={() => onSelectItem(item.name)}>
                         <img src={item.thumbnail} alt={item.name}
                             className={(item.thumbnail.indexOf('image_not_available') === -1) ? "" : "char__item_nf"}/>

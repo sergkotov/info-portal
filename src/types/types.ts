@@ -1,4 +1,5 @@
 export interface Character {
+    id: number,
     name: string,
     description: string,
     thumbnail: string,
@@ -6,7 +7,7 @@ export interface Character {
     wiki: string
 }
 
-export type CharacterShort = Pick<Character, "name" | "thumbnail">
+export type CharacterShort = Pick<Character, "id" | "name" | "thumbnail">
 
 export interface CharacterServerData {
     id?: number,

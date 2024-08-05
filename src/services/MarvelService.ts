@@ -5,6 +5,7 @@ const _apiKey = `apikey=${process.env.REACT_APP_API_KEY}`;
 
 function _transformCharacter(char: CharacterServerData) : Character {
     return {
+        id: char.id || 0,
         name: char.name || '',
         description: char.description || 'No description for now',
         thumbnail: (char.thumbnail?.path || '') + '.' + (char.thumbnail?.extension || ''),
@@ -15,6 +16,7 @@ function _transformCharacter(char: CharacterServerData) : Character {
 
 function _transformCharacterNameAndThumb(char: CharacterServerData) : CharacterShort {
     return {
+        id: char.id || 0,
         name: char.name || '',
         thumbnail: (char.thumbnail?.path || '') + '.' + (char.thumbnail?.extension || '')
     }
