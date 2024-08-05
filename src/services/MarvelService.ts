@@ -2,6 +2,8 @@ import { Character, CharacterServerData, CharactersServerData, CharacterShort, C
 
 const _apiBase = "https://gateway.marvel.com:443/v1/public/";
 const _apiKey = `apikey=${process.env.REACT_APP_API_KEY}`;
+const _baseOffset = 210;
+const _limit = 9;
 
 function _transformCharacter(char: CharacterServerData) : Character {
     return {
@@ -44,13 +46,13 @@ async function getResource(url: string) : Promise<CharactersServerData> {
     return await result.json();
 }
 
-async function getAllServerCharacters() {
-    const res =  await getResource(`${_apiBase}characters?limit=9&offset=150&${_apiKey}`);
+async function getAllServerCharacters(offset: number) {
+    const res =  await getResource(`${_apiBase}characters?limit=9&offset=${offset}&${_apiKey}`);
     return res.data?.results.filter(_transformCharacter);
 }
 
-export async function getAllCharacters() {
-    const res = await getAllServerCharacters();
+export async function getAllCharacters(offset=0) {
+    const res = await getAllServerCharacters(_baseOffset + offset * _limit);
     if(res) {
         return res.map(_transformCharacterNameAndThumb);
     }
