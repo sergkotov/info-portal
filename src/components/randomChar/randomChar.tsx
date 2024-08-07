@@ -1,45 +1,34 @@
 import React, { FC, useEffect, useState, MouseEvent  } from "react";
 import './RandomChar.scss';
 import { Character } from "../../types/types";
-import { getCharacter } from "../../services/MarvelService";
+import MarvelService from "../../services/MarvelService";
 import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../app/errorMessage/ErrorMessage";
 
 import mjolnir from '../../resources/img/mjolnir.png';
 
-
 const RandomChar: FC = ()  => {
     const [character, setCharacter] = useState<Character>({id: 0, name: '', description: '', 
         thumbnail: '', homepage: '', wiki: ''});
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
 
-    const onCharLoaded = (char: Character) => {
-        setCharacter(char);
-        setLoading(false);
-    }
-
-    const onError = () => {
-        setLoading(false);
-        setError(true);
-    }
+    const {loading, error, clearError, getCharacter} = MarvelService();
 
     useEffect(() => {
         updateRandomChar();
     }, []);
 
     function updateRandomChar() {
+        clearError();
         const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
         getCharacter(id).then(res => {
             if(res) {
-                onCharLoaded(res);
+                setCharacter(res);
             }
-        }).catch(onError);
+        });
     }
 
     const onUpdateRandomChar = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        setLoading(true);
         updateRandomChar();
     }
 
