@@ -38,7 +38,7 @@ const CharList: FC<{selectChar: (id: number) => void}> = ({selectChar}) => {
             });
         } else {
             setChars(newChars);
-        }        
+        }
     }
 
     const onError = () => {
