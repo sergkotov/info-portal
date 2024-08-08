@@ -23,7 +23,6 @@ const ComicsList: FC = () => {
     }, [pagination]);
 
     const onComicsLoaded = (newComics: Comic[]) => {
-        console.log(newComics);
         if(newComics.length < 8) {
             setComicsEnded(true);
         }

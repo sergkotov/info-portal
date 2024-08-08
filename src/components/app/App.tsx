@@ -3,6 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { MainPage, ComicsPage } from '../pages';
 import AppHeader from '../appHeader/AppHeader';
+import Page404 from '../pages/Page404';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Routes>
             <Route path="/" element={<MainPage/>}/>
             <Route path="/comics" element={<ComicsPage/>}/>
+            <Route path="*" element={<Page404/>}/>
           </Routes>
         </main>
       </div>
