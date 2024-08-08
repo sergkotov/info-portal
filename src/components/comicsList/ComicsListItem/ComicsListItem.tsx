@@ -6,8 +6,8 @@ const ComicsListItem: FC<{comics: Comic[] | null}> = ({comics}) => {
     if(comics) {
         return (
             <ul className="comics__grid">
-                {comics.map((item) => (
-                    <li key={item.id} 
+                {comics.map((item, index) => (
+                    <li key={index} 
                         tabIndex={0}
                         className="comics__item">
                         <Link to={`/comics/${item.id}`}>
