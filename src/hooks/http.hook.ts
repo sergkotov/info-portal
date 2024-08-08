@@ -1,11 +1,10 @@
 import { useState, useCallback } from "react";
-import { CharactersServerData } from "../types/types";
 
 export const useHttp = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
-    const request = useCallback(async (url: string, method = 'GET', body = null, headers={'Content-type': 'Application/json'} ): Promise<CharactersServerData> => {
+    const request = useCallback(async (url: string, method = 'GET', body = null, headers={'Content-type': 'Application/json'} ) => {
         setLoading(true);
 
         try {

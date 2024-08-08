@@ -101,3 +101,148 @@ export interface CharactersServerData {
         results: CharacterServerData[]
     }
 }
+
+export interface ComicsServerData {
+    code?: number,
+    status?: string,
+    copyright?: string,
+    attributionText?: string,
+    attributionHTML?: string,
+    etag?: string,
+    data?: {
+        offset?: number,
+        limit?: number,
+        total?: number,
+        count?: number,
+        results: ComicServerData[]
+    }
+}
+
+export interface ComicServerData {
+    id?: number,
+    digitalId?: number,
+    title?: string,
+    issueNumber?: number,
+    variantDescription?: string,
+    description?: string,
+    modified?: Date,
+    isbn?: string,
+    upc?: string,
+    diamondCode?: string,
+    ean?: string,
+    issn?: string,
+    format?: string,
+    pageCount?: number,
+    textObjects?: TextObject[],
+    resourceURI?: string,
+    urls?: ComicsUrl[],
+    series?: SeriesSummury,
+    variants?: ComicSummary[],
+    collections?: ComicSummary[],
+    collectedIssues?: ComicSummary[],
+    dates?: ComicDate[],
+    prices?: ComicPrice[],
+    thumbnail?: ComicImage,
+    images?: ComicImage[],
+    creators?: CreatorList,
+    characters?: CharacterList,
+    stories?: StoryList,
+    events?: EventList
+}
+
+interface TextObject {
+    type?: string,
+    language?: string,
+    text?: string
+}
+
+interface ComicsUrl {
+    type?: string,
+    url?: string
+}
+
+interface SeriesSummury {
+    resourceURI?: string,
+    name?: string
+}
+
+interface ComicSummary {
+    resourceURI?: string,
+    name?: string
+}
+
+interface ComicDate {
+    type?: string,
+    date?: Date
+}
+
+interface ComicPrice {
+    type?: string,
+    price?: number
+}
+
+interface ComicImage {
+    path?: string,
+    extension?: string
+}
+
+interface CreatorList {
+    available?: number,
+    returned?: number,
+    collectionURI?: string,
+    items?: CreatorSummary
+}
+
+interface CharacterList {
+    available?: number,
+    returned?: number,
+    collectionURI?: string,
+    items?: CharacterSummary
+}
+
+interface StoryList {
+    available?: number,
+    returned?: number,
+    collectionURI?: string,
+    items?: StorySummary
+}
+
+interface EventList {
+    available?: number,
+    returned?: number,
+    collectionURI?: string,
+    items?: EventSummary
+}
+
+interface CreatorSummary {
+    resourceURI?: string,
+    name?: string,
+    role?: string
+}
+
+interface CharacterSummary {
+    resourceURI?: string,
+    name?: string,
+    role?: string
+}
+
+interface StorySummary {
+    resourceURI?: string,
+    name?: string,
+    role?: string
+}
+
+interface EventSummary {
+    resourceURI?: string,
+    name?: string,
+}
+
+export interface Comic {
+    id: number,
+    title: string,
+    description: string,
+    pageCount: string,
+    thumbnail: string,
+    language: string,
+    price: string
+}

@@ -1,11 +1,13 @@
 import { useHttp } from "../hooks/http.hook";
-import { Character, CharacterServerData, CharacterShort, CharacterInfo } from "../types/types";
+import { Character, CharacterServerData, CharacterShort, CharacterInfo, Comic, ComicServerData } from "../types/types";
 
 const MarvelService = () => {
     const _apiBase = "https://gateway.marvel.com:443/v1/public/";
     const _apiKey = `apikey=${process.env.REACT_APP_API_KEY}`;
     const _baseOffset = 210;
     const _limit = 9;
+    const _baseComicsOffset = 0;
+    const _limitComics = 8;
 
     const {loading, error, request, clearError} = useHttp();
 
@@ -40,9 +42,26 @@ const MarvelService = () => {
         }
     }
 
+    function _transformComic(comic: ComicServerData) : Comic {
+        return {
+            id: comic.id || 0,
+			title: comic.title || "",
+			description: comic.description || "There is no description",
+			pageCount: comic.pageCount ? `${comic.pageCount} p.` : "No information about the number of pages",
+			thumbnail: (comic.thumbnail?.path || "") + "." + (comic.thumbnail?.extension || ""),
+			language: (comic.textObjects && comic.textObjects.length > 0 && comic.textObjects[0].language) ? comic.textObjects[0].language : "en-us",
+			price:(comic.prices && comic.prices.length > 0 && comic.prices[0].price) ? `${comic.prices[0]?.price}$` : "not available"
+        }
+    }
+
     async function getAllServerCharacters(offset: number) {
         const res =  await request(`${_apiBase}characters?limit=9&offset=${offset}&${_apiKey}`);
         return res.data?.results.filter(_transformCharacter);
+    }
+
+    async function getAllServerComics(offset: number) {
+        const res = await request(`${_apiBase}comics?limit=8&offset=${offset}&${_apiKey}`);
+        return res.data?.results.filter(_transformComic);
     }
 
     const getAllCharacters = async (offset=0) => {
@@ -67,7 +86,15 @@ const MarvelService = () => {
         }
     }
 
-    return {loading, error, clearError, getAllCharacters, getCharacter, getCharacterInfo}
+    const getAllComics = async (offset=0) => {
+        const res = await getAllServerComics(_baseComicsOffset + offset * _limitComics);
+        if(res) {
+            return res.map(_transformComic);
+        }
+        return null;
+    }
+
+    return {loading, error, clearError, getAllCharacters, getCharacter, getCharacterInfo, getAllComics}
 }
 
 export default MarvelService;

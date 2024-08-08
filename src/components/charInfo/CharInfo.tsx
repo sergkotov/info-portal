@@ -10,9 +10,10 @@ import MarvelService from "../../services/MarvelService";
 const CharInfo: FC<{charId: number | null}> = ({charId}) => {
     const [character, setCharacter] = useState<CharacterInfo | null>(null);
 
-    const {loading, error, getCharacterInfo} = MarvelService();
+    const {loading, error, getCharacterInfo, clearError} = MarvelService();
 
     function updateInfoChar(id: number) {
+        clearError();
         getCharacterInfo(id).then(res => {
             if(res) {
                 setCharacter(res);
