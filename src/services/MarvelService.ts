@@ -99,7 +99,12 @@ const MarvelService = () => {
         return _transformComic(res.data.results[0]);
     }
 
-    return {loading, error, clearError, getAllCharacters, getCharacter, getCharacterInfo, getAllComics, getComic}
+    const getCharacterByName = async (name: string) => {
+		const res = await request(`${_apiBase}characters?name=${name}&${_apiKey}`);
+		return res.data.results.map(_transformCharacter);
+	};
+
+    return {loading, error, clearError, getAllCharacters, getCharacter, getCharacterInfo, getAllComics, getComic, getCharacterByName}
 }
 
 export default MarvelService;

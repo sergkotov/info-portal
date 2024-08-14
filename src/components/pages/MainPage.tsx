@@ -2,6 +2,7 @@ import React, { FC, useState } from "react";
 import RandomChar from '../randomChar/RandomChar';
 import CharList from '../charList/CharList';
 import CharInfo from '../charInfo/CharInfo';
+import CharSearchForm from "../charSearchForm/CharSearchForm";
 
 import decoration from '../../resources/img/vision.png';
 
@@ -17,7 +18,11 @@ const MainPage: FC = () => {
             <RandomChar/>
             <div className="char__content">
                 <CharList selectChar={onSelectChar}/>
-                {<CharInfo charId={selectedChar}/>}
+                <div>
+                    <CharInfo charId={selectedChar}/>
+                    <CharSearchForm/>
+                </div>
+                
             </div>
             <img className="bg-decoration" src={decoration} alt="vision"/>
         </>

@@ -11,6 +11,8 @@ export interface CharacterInfo extends Character {
     comics?: CharacterComicSummary[]
 }
 
+export type  CharacterSingle = Pick<Character, "name" | "thumbnail" | "description">
+
 export type CharacterShort = Pick<Character, "id" | "name" | "thumbnail">
 
 export interface CharacterServerData {
