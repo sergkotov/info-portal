@@ -5,6 +5,7 @@ import { Character } from '../../types/types';
 import MarvelService from '../../services/MarvelService';
 import ErrorMessage from '../app/errorMessage/ErrorMessage';
 import Spinner from '../spinner/Spinner';
+import AppBanner from '../appBanner/AppBanner';
 
 const SingleCharacterPage: FC = () => {
     const {charId} = useParams();
@@ -27,11 +28,15 @@ const SingleCharacterPage: FC = () => {
     }, [charId]);
 
     return (
-        <div className="char__info">
-            {error && <ErrorMessage/>}
-            {loading && <Spinner/>}
-            {!(error || loading) && <SingleCharView char={char}/>}
-        </div>
+        <>
+            <AppBanner/>
+            <div className="char__info">
+                {error && <ErrorMessage/>}
+                {loading && <Spinner/>}
+                {!(error || loading) && <SingleCharView char={char}/>}
+            </div>
+        </>
+
     )
 }
 

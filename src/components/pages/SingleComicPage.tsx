@@ -5,6 +5,7 @@ import MarvelService from '../../services/MarvelService';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../app/errorMessage/ErrorMessage';
 import { Comic } from '../../types/types';
+import AppBanner from '../appBanner/AppBanner';
 
 const SingleComicPage: FC = () => {
     const {comicId} = useParams();
@@ -27,11 +28,15 @@ const SingleComicPage: FC = () => {
     }, [comicId]);
 
     return (
-        <div className="char__info">
-            {error && <ErrorMessage/>}
-            {loading && <Spinner/>}
-            {!(error || loading) && <SingleComicView comic={comic}/>}
-        </div>
+        <>
+            <AppBanner/>
+            <div className="char__info">
+                {error && <ErrorMessage/>}
+                {loading && <Spinner/>}
+                {!(error || loading) && <SingleComicView comic={comic}/>}
+            </div>
+        </>
+
     )
 }
 
